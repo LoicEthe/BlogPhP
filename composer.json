@@ -1,0 +1,15 @@
+{
+    "name": "formationpeweb/blog",
+    "autoload": {
+        "psr-4": {
+            "Formationpeweb\\Blog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Loïc",
+            "email": "loic.ethve@gmail.com"
+        }
+    ],
+    "require": {}
+}
