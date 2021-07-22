@@ -35,8 +35,8 @@ if(!(isset($article_title) && isset($article_description)) || !empty($error_mess
 
 else { // SINON ENVOIT A LA BASE DE DONNES
     include "../Dao/article_dao.php";
-    try {
-        add_article($article_title,$article_description);
+    try { 
+        add_article($article_title, $article_description);
     } 
     catch (PDOException $e) {
         echo $e->getMessage();
