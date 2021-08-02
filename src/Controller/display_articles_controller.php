@@ -2,6 +2,7 @@
 
 include "../Dao/article_dao.php";
 
+
 try{
     $articles = get_all_article();
     include "../View/display_articles.php";

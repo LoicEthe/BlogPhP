@@ -1,14 +1,18 @@
 <?php
+$title = sprintf("Modif article n° %d", $article['id_article']);
 
-$title = "Ajout d'un nouvel article";
-include 'header.php' ;
+include 'header.php';
+?>
 
-foreach($articles as $article) : ?>
-<article>
-    <h1><?= $article['title']?></h1>
-    <p><?= $article['description']?></p>
-</article>
+    <h2><?=$article["title"]?></h2>
+    <p><?=$article["description"]?></p>
+    <em><?=$article["date_creation"]?></em>
+    <a href="edit_article_controller.php?id=<?= $article['id_article'] ?>">
+    <button>Editer l'article</button>
+    </a>
+    <a href="delete_article_controller.php?id=<?= $article['id_article'] ?>">
+    <button>Supprimer l'article</button>
+    </a>
 
-
-<?php endforeach;
-include 'footer.php' ?>
+<?php
+include 'footer.php';?>
