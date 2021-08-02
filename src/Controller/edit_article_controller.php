@@ -5,6 +5,7 @@
 //$id = htmlspecialchars($_GET["id"]);
 $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 if ($id !== false) {
+    // VERIFIER SI $_POST EST VIDE
     if(empty($_POST)){
         include "../Dao/article_dao.php";
     try {
@@ -36,6 +37,7 @@ if ($id !== false) {
         "description"
     );
 
+    // verifier le contenu du titre et description
     if (isset($article_title) && isset($article_description)) {
         if ($article_title === false) {
             $error_messages[] = "title inexistant";
@@ -44,16 +46,19 @@ if ($id !== false) {
             $error_messages[] = "description inexistante";
         }
     }
-    $article = [
-        "title" => $article_title,
-        "description" => $article_description,
-        "id_article" => $id
-    ];
+
+
     if (!(isset($article_title) && isset($article_description)) || !empty($error_messages)) {
         include "../View/edit_article.php";
     } else {
         include "../Dao/article_dao.php";
+        //update de l'article
         try {
+            $article = [
+                "title" => $article_title,
+                "description" => $article_description,
+                "id_article" => $id
+            ];
             update_article($article);
             header(sprintf("location:display_articles_controller.php?id=%d",$article["id_article"]));
         } catch (PDOException $e) {
@@ -62,5 +67,6 @@ if ($id !== false) {
     }
 }
 }else {
+        // on peut aussi diriger vers une page 404
     header("location:display_articles_controller.php");
 }

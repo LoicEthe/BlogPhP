@@ -33,6 +33,7 @@ if(!(isset($article_title) && isset($article_description)) || !empty($error_mess
     include "../View/add_article.php";
 }
 
+
 else { // SINON ENVOIT A LA BASE DE DONNES
     include "../Dao/article_dao.php";
     try { 

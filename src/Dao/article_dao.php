@@ -1,14 +1,7 @@
 <?php 
-function getPDO(){
-    return new PDO(
-        "mysql:host=localhost;dbname=ccib;charset=UTF8",
-        "root",
-        "",
-        [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ]
-    );
-}
+
+require_once "PDO/pdo_dao.php";
+
 function add_article(string $title, string $description)
 {
     $dbh = getPDO();
@@ -51,4 +44,14 @@ function update_article(array $article) : void{
         ":description"=>$article['description'],
         ":id"=>$article['id_article']
     ]);
+}
+
+function delete_article(int $id): void{
+    $dbh = getPDO();
+
+    $req = $dbh->prepare("DELETE FROM article 
+                        WHERE id_article = :id_article");
+
+    $req->execute([":id_article" => $id]);
+    
 }
