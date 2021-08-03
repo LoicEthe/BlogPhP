@@ -1,0 +1,23 @@
+*{
+    text-decoration: none;
+}
+#edit{
+    background-color: rgba(235, 220, 80, 0.746);
+    border: 1px solid;
+}
+#delete{
+    background-color: rgba(250, 120, 120, 0.829);
+    border: 1px solid;
+
+}
+#add{
+    background-color: rgb(114, 246, 158);
+    border: 1px solid;
+
+}
+article{
+    background-color: rgb(245, 241, 235);
+}
+.comments{
+    background-color: rgb(114, 226, 246);;
+}

@@ -9,21 +9,31 @@ include 'header.php';
     
     <em><?=$article["date_creation"]?></em>
     
-    <a href="edit_article_controller.php?id=<?= $article['id_article'] ?>">
-    <button>Editer l'article</button>
+</article>
+<a href="edit_article_controller.php?id=<?= $article['id_article'] ?>">
+    <button id="edit">Editer l'article</button>
     </a>
     
     <a href="delete_article_controller.php?id=<?= $article['id_article'] ?>">
-    <button>Supprimer l'article</button>
+    <button id="delete">Supprimer l'article</button>
     </a>
-    
-</article>
 
-<?php if(!empty($commentaires)) : ?>
+    <a href="add_commentaire_controller.php?id=<?= $article['id_article'] ?>">
+    <button id="add">Ajouter un commentaire</button>
+    </a>
+
+<?php if(!empty($commentaires)) :  ?> <h2>COMMENTAIRES</h2>
     <div>
         <?php foreach ($commentaires as $commentaire) : ?>
-        <div><span><?= $commentaire["date_creation"] ?></span>
+        <div class="comments"><span><?= $commentaire["date_creation"] ?></span>
             <p><?=  $commentaire["contenu"] ?></p>
+
+            <a href="delete_commentaire_controller.php?id=<?= $article['id_article'] ?>">
+            <button id="delete">Supprimer un commentaire</button>
+            </a>
+            <a href="edit_commentaire_controller.php?article=<?= $article["id_article"] ?>&amp;id=<?=$commentaire["id_commentaire"]?>">
+            <button id="edit">Modifier un commentaire</button>
+            </a>
         </div>
         <?php endforeach; ?>
     </div>
