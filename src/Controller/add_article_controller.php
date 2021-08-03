@@ -38,6 +38,7 @@ else { // SINON ENVOIT A LA BASE DE DONNES
     include "../Dao/article_dao.php";
     try { 
         add_article($article_title, $article_description);
+        header("Location: display_articles_controller.php");
     } 
     catch (PDOException $e) {
         echo $e->getMessage();

@@ -47,13 +47,11 @@ function update_commentaire(array $commentaire): void
     ]);
 }
 
-
-
-function delete_comment(int $id): void{
+function delete_commentaire(int $id):void{
     $dbh = getPDO();
 
-    $req = $dbh->prepare("DELETE  FROM commentaire 
-                        WHERE id_commentaire = :commentaire_id");
+    $req = $dbh->prepare("DELETE FROM commentaire 
+                        WHERE id_commentaire = :id_commentaire");
 
     $req->execute([":id_commentaire" => $id]);
 }
