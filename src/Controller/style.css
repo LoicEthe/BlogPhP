@@ -21,3 +21,12 @@ article{
 .comments{
     background-color: rgb(114, 226, 246);;
 }
+#acc{
+    background-color: rgb(255, 94, 0);
+    border: 1px solid;
+}
+
+#more{
+    background-color: rgb(0, 174, 255);
+    border: 1px solid;
+}

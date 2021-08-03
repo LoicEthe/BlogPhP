@@ -28,7 +28,7 @@ include 'header.php';
         <div class="comments"><span><?= $commentaire["date_creation"] ?></span>
             <p><?=  $commentaire["contenu"] ?></p>
 
-            <a href="delete_commentaire_controller.php?id=<?= $commentaire['id_commentaire'] ?>">
+            <a href="delete_commentaire_controller.php?article=<?= $article["id_article"] ?>&amp;id=<?=$commentaire["id_commentaire"]?>">
             <button id="delete">Supprimer un commentaire</button>
             </a>
             <a href="edit_commentaire_controller.php?article=<?= $article["id_article"] ?>&amp;id=<?=$commentaire["id_commentaire"]?>">
