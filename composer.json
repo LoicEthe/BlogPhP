@@ -1,15 +1,10 @@
 {
-    "name": "formationpeweb/blog",
+    "name": "cci/blog",
     "autoload": {
         "psr-4": {
-            "Formationpeweb\\Blog\\": "src/"
+            "model\\": "src/Model",
+            "dao\\": "src/Dao"
         }
     },
-    "authors": [
-        {
-            "name": "Loïc",
-            "email": "loic.ethve@gmail.com"
-        }
-    ],
     "require": {}
 }

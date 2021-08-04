@@ -14,6 +14,7 @@ if (!empty($error_messages)) :?>
     </ul>
 </div>
 <?php endif; ?>
+
 <form action="edit_article_controller.php?id=<?= $article["id_article"]?>" method="post" style="display: flex; flex-direction:column; width: 500px; height:300px">
     <input type="text" name="title" id="title" value="<?=$article["title"]?>">
     

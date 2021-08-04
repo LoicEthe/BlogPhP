@@ -19,7 +19,9 @@ article{
     background-color: rgb(245, 241, 235);
 }
 .comments{
-    background-color: rgb(114, 226, 246);;
+    background-color: rgb(114, 226, 246);
+    margin-bottom: 1%;
+    
 }
 #acc{
     background-color: rgb(255, 94, 0);
@@ -28,5 +30,10 @@ article{
 
 #more{
     background-color: rgb(0, 174, 255);
+    border: 1px solid;
+}
+
+#list{
+    background-color: rgb(187, 255, 0);
     border: 1px solid;
 }

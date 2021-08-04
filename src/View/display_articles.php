@@ -7,6 +7,10 @@ include 'header.php';
     <button id="add">Ajouter un article</button>
 </a>
 
+<a href="show_users_controller.php">
+    <button id="list">Voir liste utilisateurs</button>
+</a>
+
 <?php
 foreach ($articles as $article): ?>
 
