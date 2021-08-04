@@ -1,4 +1,6 @@
 <?php
+session_start();
+include "../../vendor/autoload.php";
 
 $commentaire_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 $article_id = filter_input(INPUT_GET, "article", FILTER_VALIDATE_INT);

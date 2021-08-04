@@ -1,4 +1,6 @@
 <?php
+session_start();
+include "../../vendor/autoload.php";
 
 $options_title = ["options" => [ // FILTRE REGEX POUR TITRE
     "regexp" => "#^[a-zA-Z].+$#"

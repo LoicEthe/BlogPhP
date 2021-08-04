@@ -1,9 +1,12 @@
 <?php
+session_start();
+
 
 include "../../vendor/autoload.php";
 
 use dao\UserDao;
 use model\User;
+
 
 
 
@@ -43,7 +46,7 @@ if(empty($_POST)){
         $signup_user = new User(); // APPEL DE LA CLASSE CREEE DANS LE MODEL
         $signup_user->setPseudo($signup_post["pseudo"]); 
         $signup_user->setEmail($signup_post["email"]); 
-        $signup_user->setPwd($signup_post["pwd"]); 
+        $signup_user->setPwd(password_hash($signup_post["pwd"],PASSWORD_DEFAULT));  //HASHAGE DU PASSWORD
         
         try{
             $userDao = new UserDao();

@@ -32,7 +32,7 @@ include 'header.php';
             <button id="delete">Supprimer un commentaire</button>
             </a>
             <a href="edit_commentaire_controller.php?article=<?= $article["id_article"] ?>&amp;id=<?=$commentaire["id_commentaire"]?>">
-            <button id="edit">Modifier un commentaire</button>
+            <button id="edit" >Modifier un commentaire</button>
             </a>
         </div>
         <?php endforeach; ?>

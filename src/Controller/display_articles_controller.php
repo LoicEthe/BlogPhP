@@ -1,6 +1,7 @@
 <?php
-
+session_start();
 include "../Dao/article_dao.php";
+include "../../vendor/autoload.php";
 
 
 try{

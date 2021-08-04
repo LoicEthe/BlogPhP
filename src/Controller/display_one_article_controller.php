@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+include "../../vendor/autoload.php";
 
 $article_id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 

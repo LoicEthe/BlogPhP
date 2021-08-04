@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+include "../../vendor/autoload.php";
 include "../Dao/article_dao.php";
 
 if($article_id !== false){
