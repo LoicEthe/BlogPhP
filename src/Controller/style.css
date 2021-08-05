@@ -38,6 +38,8 @@ article{
 #edit{
     background-color: rgb(212, 224, 38);
     border: 1px solid rgba(0, 0, 0, 0.411);
+    text-decoration: none;
+
 }
 
 #delete{
@@ -48,4 +50,10 @@ article{
 #add{
     background-color: rgb(30, 190, 38);
     border: 1px solid rgba(0, 0, 0, 0.411);
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
 }

@@ -127,18 +127,16 @@ class UserDao{
         } 
 
     public function updateUser(User $user): void{
-        $req = $this->pdo->prepare("UPDATE user  AS u 
-                                    SET u.nom = :nom, 
-                                    u.prenom = :prenom,
-                                    u.pseudo = :pseudo,
-                                    u.email = :email,
-                                    u.pwd = :pwd, 
-                                    g.type = :genre,
-                                    r.nom = :group
-                                    LEFT OUTER JOIN genre AS g
-                                            ON u.id_genre = g.id_genre
-                                        LEFT OUTER JOIN groupe AS r
-                                            ON u.id_group = r.id_group
+        $req = $this->pdo->prepare("UPDATE user 
+                                    SET nom = :nom, 
+                                    prenom = :prenom,
+                                    pseudo = :pseudo,
+                                    email = :email,
+                                    pwd = :pwd, 
+                                    id_genre = (
+                                            SELECT id_genre FROM genre WHERE type LIKE :genre),
+                                    id_group = (
+                                            SELECT id_group FROM groupe WHERE nom LIKE :group)
                                     WHERE id_user = :id_user
                                     ");
         $req->execute([
@@ -146,10 +144,20 @@ class UserDao{
             ":nom" => $user->getNom(),
             ":prenom" => $user->getPrenom(),
             ":pseudo" => $user->getPseudo(),
+            ":email" => $user->getEmail(),
             ":pwd" => $user->getPwd(),
             ":genre" => $user->getGenre(),
             ":group" => $user->getGroupe(),
 
         ]);
     }
+
+    public function deleteUser(int $id_user){
+        $req = $this->pdo->prepare("DELETE FROM user
+                                        WHERE id_user = :id_user");
+        $req->execute([":id_user" => $id_user]);
+        
+    }
+
+    
 }

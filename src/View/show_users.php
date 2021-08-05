@@ -33,7 +33,8 @@ else :
           <th>Email</th>
           <th>Date Création</th>
           <th>Genre</th>
-          <th>Groupe</th>
+          <th>Nom du groupe</th>
+          <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -50,6 +51,11 @@ else :
             <td><?= $user->getDate_creation() ?></td>
             <td><?= $user->getGenre() ?></td>
             <td><?= $user->getGroupe() ?></td>
+            <td>
+                <a href="<?= sprintf("show_one_user_controller.php?id=%d",$user->getId_user()) ?>"><button id="more">Afficher</button></a>
+                <a href="<?= sprintf("edit_user_controller.php?id=%d",$user->getId_user()) ?>"><button id="edit">Modifier</button></a>
+                <a href="<?= sprintf("delete_user_controller.php?id=%d",$user->getId_user()) ?>"><button id="delete">Supprimer</button></a>
+            </td>
         </tr> 
         <?php
         } while ($user = next($listUsers)) ?>
