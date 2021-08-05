@@ -1,46 +1,43 @@
 <?php
+
+use dao\ArticleDao;
+
 session_start();
 include "../../vendor/autoload.php";
 
-$options_title = ["options" => [ // FILTRE REGEX POUR TITRE
-    "regexp" => "#^[a-zA-Z].+$#"
-]];
 
-$article_title = filter_input(  // VA CHERCHER LES DONNES DU FORM GRACE A INPUT_POST
-    INPUT_POST, 
-    "title",
-    FILTER_VALIDATE_REGEXP,
-    $options_title
-);
 
-$article_description = filter_input(
-    INPUT_POST, 
-    "description"
-);
+$args = [
+    "title" => [
+        "filter" => FILTER_VALIDATE_REGEXP,
+        "options" => [
+            "regexp" => "#^[A-Z]#u"
+        ]
+        ],
+        "description" => []
+    ];
 
 // IMPLEMENTATION DE LA BDD
 
+$article = filter_input_array(INPUT_POST, $args);
+
 // SI TITRE OU DESC VIDE 
-if(isset($article_title) && isset($article_description)){
-    if($article_title === false){
+if(isset($article["title"]) && isset($article["description"])){
+    if($article["title"] === false){
         $error_messages[] = "Titre vide !";
 
     }
-    if (empty(trim($article_description))){
+    if (empty(trim($article["description"]))){
         $error_messages[] = "Description vide !";
     }
 }
 
-if(!(isset($article_title) && isset($article_description)) || !empty($error_messages)){ 
+if(!(isset($article["title"]) && isset($article["description"])) || !empty($error_messages)){ 
     include "../View/add_article.php";
 }
-
-
-else { // SINON ENVOIT A LA BASE DE DONNES
-    include "../Dao/article_dao.php";
+else { 
     try { 
-        add_article($article_title, $article_description);
-        header("Location: display_articles_controller.php");
+        (new ArticleDao)->addArticle($article["title"], $article["description"]);
     } 
     catch (PDOException $e) {
         echo $e->getMessage();

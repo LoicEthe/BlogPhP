@@ -1,4 +1,8 @@
 <?php
+
+use dao\ArticleDao;
+use model\Article;
+
 session_start();
 include "../../vendor/autoload.php";
 
@@ -7,59 +11,57 @@ $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 if ($id !== false) {
     // VERIFIER SI $_POST EST VIDE
     if(empty($_POST)){
-        include "../Dao/article_dao.php";
     try {
-        $article = get_article_by_id($id);
-        if (!empty($article)) {
+        $article = (new ArticleDao())->getArticleById($id);
+
+        if (!is_null($article)) {
             include "../View/edit_article.php";
         }else {
             header("location:display_articles_controller.php");
+            exit;
         }
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }else{
-
-
-    $options_title = [
-        "options" => [
-            "regexp" => "#^.+$#"
-        ]
-    ];
-    $article_title = filter_input(
-        INPUT_POST,
-        "title",
-        FILTER_VALIDATE_REGEXP,
-        $options_title
+    $args = [   
+        "title" => [
+            "filter" => FILTER_VALIDATE_REGEXP,
+            "options" => [
+                "regexp" => "#^[A-Z]#u"
+            ]
+            ],
+            "description" => []
+        ];
+    
+    $article_post = filter_input_array(
+        INPUT_POST ,
+        $args
     );
-    $article_description = filter_input(
-        INPUT_POST,
-        "description"
-    );
+
 
     // verifier le contenu du titre et description
-    if (isset($article_title) && isset($article_description)) {
-        if ($article_title === false) {
+    if (isset( $article_post["title"]) && isset( $article_post["description"])) {
+        if ( $article_post["title"] === false) {
             $error_messages[] = "title inexistant";
         }
-        if (empty(trim($article_description))) {
+
+        if (empty(trim( $article_post["description"]))) {
             $error_messages[] = "description inexistante";
         }
     }
 
 
-    if (!(isset($article_title) && isset($article_description)) || !empty($error_messages)) {
+    if (!(isset( $article_post["title"]) && isset( $article_post["description"])) || !empty($error_messages)) {
         include "../View/edit_article.php";
     } else {
-        include "../Dao/article_dao.php";
+        $article = (new Article)
+        ->setId_article($article_id)
+        ->setTitle( $article_post["title"])
+        ->setDescription( $article_post["description"]);
         //update de l'article
         try {
-            $article = [
-                "title" => $article_title,
-                "description" => $article_description,
-                "id_article" => $id
-            ];
-            update_article($article);
+            (new ArticleDao())->updateArticle($article);
             header(sprintf("location:display_articles_controller.php?id=%d",$article["id_article"]));
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -67,6 +69,6 @@ if ($id !== false) {
     }
 }
 }else {
-        // on peut aussi diriger vers une page 404
     header("location:display_articles_controller.php");
+    exit;
 }

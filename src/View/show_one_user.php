@@ -12,6 +12,7 @@ $title = (unserialize($_SESSION["user"])->getId_user() === $user->getId_user()) 
 
 
 <a href="edit_user_controller.php?id=<?= $user->getId_user() ?>"><button id="edit"> Modifier le profil</button></a>
+<a href="delete_user_controller.php?id=<?= $user->getId_user() ?>"><button id="delete"> Supprimer l'utilisateur</button></a>
 
 
 
