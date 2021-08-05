@@ -55,14 +55,14 @@ if ($id !== false) {
     if (!(isset( $article_post["title"]) && isset( $article_post["description"])) || !empty($error_messages)) {
         include "../View/edit_article.php";
     } else {
-        $article = (new Article)
-        ->setId_article($article_id)
-        ->setTitle( $article_post["title"])
+        $article = (new Article())
+        ->setId_article($id)
+        ->setTitle($article_post["title"])
         ->setDescription( $article_post["description"]);
         //update de l'article
         try {
             (new ArticleDao())->updateArticle($article);
-            header(sprintf("location:display_articles_controller.php?id=%d",$article["id_article"]));
+            header(sprintf("location:display_articles_controller.php?id=%d",$article->getId_article()));
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

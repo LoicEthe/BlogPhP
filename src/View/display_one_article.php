@@ -7,7 +7,7 @@ include 'header.php';
     <h2><?=trim(filter_var($article->getTitle(),FILTER_SANITIZE_FULL_SPECIAL_CHARS))?></h2>
     <p><?= nl2br(trim(filter_var($article->getDescription(),FILTER_SANITIZE_FULL_SPECIAL_CHARS)))?></p>
     
-    <em><?=$article["date_creation"]?></em>
+    <em><?=$article->getDate_creation()?></em>
     
 </article>
 <a href="edit_article_controller.php?id=<?= $article->getId_article() ?>">

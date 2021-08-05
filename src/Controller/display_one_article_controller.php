@@ -14,7 +14,7 @@ if($article_id !== false){
         $article = (new ArticleDao())->getArticleById($article_id);
         if(!is_null($article)){
             // RECUPERATION DU COMMENTAIRE
-            $commentaires = get_commentaire_by_article_id($article_id);
+            // $commentaires = get_commentaire_by_article_id($article_id);
             include "../View/display_one_article.php";
         } else{
             header("location:display_articles_controller.php");

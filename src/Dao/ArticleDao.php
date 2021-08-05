@@ -35,6 +35,7 @@ class ArticleDao{
             ":title" => $article->getTitle(),
             ":description" => $article->getDescription()
         ]);
+        return $this->pdo->lastInsertId();
     }
     
     function getAllArticle(): array{
@@ -44,7 +45,7 @@ class ArticleDao{
         $result = $req->fetchAll(PDO::FETCH_ASSOC);
         
         foreach($result as $key => $article){
-            $result[$key] = (new Article)
+            $result[$key] = (new Article())
                 ->setId_article($article["id_article"])
                 ->setTitle($article["title"])
                 ->setDescription($article["description"])
@@ -62,9 +63,9 @@ class ArticleDao{
         $req->execute();
         $result = $req->fetch(PDO::FETCH_ASSOC);
 
-        if(empty($result)){
-            return  (new Article)
-            ->setId_article($result["article"])
+        if(!empty($result)){
+            return (new Article())
+            ->setId_article($result["id_article"])
             ->setTitle($result["title"])
             ->setDescription($result["description"])
             ->setId_user($result["id_user"])
