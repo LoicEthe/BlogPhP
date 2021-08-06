@@ -1,4 +1,8 @@
 <?php
+
+use dao\CommentaireDao;
+use model\Commentaire;
+
 include "../../vendor/autoload.php";
 session_start();
 
@@ -9,24 +13,29 @@ if($article_id !== false){
         include "../View/add_commentaire.php";
     }
     else{
-        $commentaire = [
-            "article_id" => $article_id,
+        $comment = [
+            "id_article" => $article_id,
             "contenu" => filter_input(INPUT_POST, "contenu")
         ];
-
-        if(isset($commentaire["contenu"]) && empty(trim($commentaire["contenu"]))){
+        $commentaire = (new Commentaire())
+        ->setId_article($comment["id_article"])
+        ->setContenu($comment["contenu"]);
+        
+        
+        if(isset($comment["contenu"]) && empty(trim($comment["contenu"]))){
             $error_messages[] = "Commentaire vide !";
         }
         
-        if(!isset($commentaire["contenu"]) || !empty($error_messages)){
+        if(!isset($comment["contenu"]) || !empty($error_messages)){
         
             include "../View/add_commentaire.php";
         }
         else{
-            include "../Dao/commentaire_dao.php";
+            include "../Dao/CommentaireDao.php";
             try{
-                add_commentaire($commentaire);
-                header(sprintf("location:display_one_article_controller.php?id=%d", $commentaire["article_id"]));
+                (new CommentaireDao())->addCommentaire($commentaire);
+                echo 'alors';
+                // header(sprintf("location:display_one_article_controller.php?id=%d", $comment["article_id"]));
             }
             catch (PDOException $e){
                 echo $e->getMessage();
